@@ -1,5 +1,6 @@
-package com.example.composegenapp
+package com.example.composegenapp.data
 
+import com.example.composegenapp.common.Constants.Companion.rocketsUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.cache.HttpCache
@@ -10,10 +11,6 @@ import kotlinx.serialization.json.Json
 
 
 class SpaceX {
-
-    companion object {
-        const val url = "https://api.spacexdata.com/v4/launches"
-    }
 
     private val httpClient = HttpClient {
         install(HttpCache)
@@ -26,26 +23,10 @@ class SpaceX {
         }
     }
 
-//    @Throws(Exception::class)
+    @Throws(Exception::class)
     suspend fun getRockets(): List<FalconInfo> {
         val rockets: Array<FalconInfo> =
-            httpClient.get(url).body()
+            httpClient.get(rocketsUrl).body()
         return rockets.asList()
     }
 }
-
-//    LaunchedEffect(keyLoad) {
-//        textError = "Ok"
-//        visibleProgress = true
-////        rockets = null
-//        visibleError = try {
-//            scope.run {
-//                rockets = SpaceX().getRockets()
-//                false
-//            }
-//        } catch (e: Exception) {
-//            textError = e.localizedMessage ?: "error"
-//            true
-//        }
-//    }
-

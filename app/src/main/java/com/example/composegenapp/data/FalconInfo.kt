@@ -1,4 +1,4 @@
-package com.example.composegenapp
+package com.example.composegenapp.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

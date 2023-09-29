@@ -1,4 +1,4 @@
-package com.example.composegenapp
+package com.example.composegenapp.ui
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.composegenapp.data.FalconInfo
 
 @Composable
 fun FalconInfoCard(falconInfo: FalconInfo) {
@@ -88,7 +89,7 @@ fun FalconInfoCard(falconInfo: FalconInfo) {
 
 @Preview
 @Composable
-fun PreviewMessageCard() {
+fun PreviewFalconInfoCard() {
     FalconInfoCard(
         FalconInfo(
             staticFireDateUtc = "234234234",

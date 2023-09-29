@@ -1,4 +1,4 @@
-package com.example.composegenapp
+package com.example.composegenapp.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHost
 
 @Composable
 fun LoginScreen() {

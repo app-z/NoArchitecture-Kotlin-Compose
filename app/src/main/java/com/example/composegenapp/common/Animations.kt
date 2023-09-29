@@ -1,4 +1,4 @@
-package com.example.composegenapp
+package com.example.composegenapp.common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.DecayAnimation
@@ -34,7 +34,7 @@ object Animations {
         val state by remember { mutableStateOf(false) }
         val anim = remember {
             DecayAnimation(
-                animationSpec = FloatExponentialDecaySpec(frictionMultiplier = 0.7f),
+                animationSpec = FloatExponentialDecaySpec(frictionMultiplier = 0.25f),
                 initialValue = 0f,
                 initialVelocity = 500f
             )
