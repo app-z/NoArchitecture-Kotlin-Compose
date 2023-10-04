@@ -38,5 +38,4 @@ class FalconRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO).onFlowStarts()
     }
-
 }

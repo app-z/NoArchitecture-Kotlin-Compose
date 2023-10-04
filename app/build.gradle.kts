@@ -61,35 +61,44 @@ android {
 
 dependencies {
 
-    implementation(libs.engage.core)
-    val ktorVersion = "2.3.4"
+ //   implementation(libs.engage.core)
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui:1.5.2")
-    implementation("androidx.compose.ui:ui-graphics:1.5.2")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
-    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
 
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
 
-    implementation("de.jensklingenberg.ktorfit:ktorfit-lib:1.7.0")
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+
+    implementation(libs.androidx.material3)
+
+    implementation(libs.io.ktor.ktor.client.core)
+    implementation(libs.ktor.ktor.client.okhttp)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+
+    implementation(libs.ktorfit.lib)
     ksp("de.jensklingenberg.ktorfit:ktorfit-ksp:1.7.0")
 
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    implementation(libs.io.ktor.ktor.client.core)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.coil)
     implementation(libs.coil.compose)
 
-    implementation("androidx.compose.material:material-icons-extended:1.5.1")
+    implementation(libs.androidx.material.icons.extended)
 
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
@@ -108,6 +117,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
