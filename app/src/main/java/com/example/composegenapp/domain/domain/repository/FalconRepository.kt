@@ -1,4 +1,4 @@
-package com.galeryalina.domain.repository
+package com.example.composegenapp.domain.domain.repository
 
 import com.example.composegenapp.common.ResponseResult
 import com.example.composegenapp.domain.domain.model.FalconInfo

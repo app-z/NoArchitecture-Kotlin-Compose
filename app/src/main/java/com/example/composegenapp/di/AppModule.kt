@@ -4,11 +4,14 @@ import android.content.Context
 import com.example.composegenapp.common.Constants
 import com.example.composegenapp.db.FalconInfoDao
 import com.example.composegenapp.db.FalconInfoDatabase
-import com.example.composegenapp.remote.ApiService
-import com.example.composegenapp.remote.RemoteDataSourceImpl
-import com.galeryalina.domain.repository.FalconRepository
+import com.example.composegenapp.domain.domain.repository.FalconRepository
 import com.example.composegenapp.domain.domain.repository.FalconRepositoryImpl
-import com.galeryalina.local.LocalDataSource
+import com.example.composegenapp.domain.domain.usecase.GetFalconInfoUseCase
+import com.example.composegenapp.domain.domain.usecase.GetFalconInfoUseCaseImpl
+import com.example.composegenapp.local.LocalDataSource
+import com.example.composegenapp.remote.ApiService
+import com.example.composegenapp.remote.RemoteDataSource
+import com.example.composegenapp.remote.RemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,13 +29,15 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context): FalconInfoDatabase = FalconInfoDatabase.getDatabase(appContext, CoroutineScope(SupervisorJob()))
+    fun provideDatabase(@ApplicationContext appContext: Context): FalconInfoDatabase =
+        FalconInfoDatabase.getDatabase(appContext, CoroutineScope(SupervisorJob()))
 
     @Singleton
     @Provides
@@ -41,12 +46,19 @@ object AppModule {
     @Singleton
     @Provides
     fun provideKtorfit(): Ktorfit {
-
         val ktorfit = ktorfit {
             baseUrl(Constants.BASE_URL)
             httpClient(HttpClient {
-                install(ContentNegotiation) {
-                    json(Json { isLenient = true; ignoreUnknownKeys = true })
+                // install(HttpCache)
+                install(ContentNegotiation)
+                {
+                    json(
+                        Json {
+                            prettyPrint = true
+                            isLenient = true
+                            ignoreUnknownKeys = true
+                        }
+                    )
                 }
             })
             converterFactories(
@@ -67,10 +79,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppRepository(
-        api: ApiService, localDataSource: LocalDataSource
+        localDataSource: LocalDataSource,
+        remoteDataSource: RemoteDataSource
     ): FalconRepository {
-        val remoteDataSourceImpl = RemoteDataSourceImpl(api)
-        return FalconRepositoryImpl(remoteDataSourceImpl, localDataSource = localDataSource)
+        return FalconRepositoryImpl(remoteDataSource, localDataSource = localDataSource)
     }
 
     @Provides
@@ -79,4 +91,15 @@ object AppModule {
         return LocalDataSource(dao)
     }
 
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(api: ApiService): RemoteDataSource {
+        return RemoteDataSourceImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFalconInfoUseCase(falconInfoRepository: FalconRepository): GetFalconInfoUseCase {
+        return GetFalconInfoUseCaseImpl(falconInfoRepository)
+    }
 }

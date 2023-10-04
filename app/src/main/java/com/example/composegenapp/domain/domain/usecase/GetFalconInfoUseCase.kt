@@ -1,7 +1,9 @@
 package com.example.composegenapp.domain.domain.usecase
 
-import com.example.composegenapp.domain.domain.repository.FalconRepositoryImpl
+import com.example.composegenapp.common.ResponseResult
+import com.example.composegenapp.domain.domain.model.FalconInfo
+import kotlinx.coroutines.flow.Flow
 
-class GetFalconInfoUseCase constructor(private val falconInfoRepository: FalconRepositoryImpl) {
-    suspend fun getFalconInfo() = falconInfoRepository.getFalconInfo()
+interface GetFalconInfoUseCase {
+    suspend fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>>
 }

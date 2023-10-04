@@ -5,14 +5,14 @@ import com.example.composegenapp.common.onFlowStarts
 import com.example.composegenapp.data.DataMapper
 import com.example.composegenapp.domain.domain.model.FalconInfo
 import com.example.composegenapp.remote.RemoteDataSource
-import com.galeryalina.domain.repository.FalconRepository
-import com.galeryalina.local.LocalDataSource
+import com.example.composegenapp.local.LocalDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class FalconRepositoryImpl constructor(
+class FalconRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
 ) : FalconRepository {
     override suspend fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>> {

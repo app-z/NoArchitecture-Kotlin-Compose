@@ -8,8 +8,10 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.ServerResponseException
+import javax.inject.Inject
 
-class RemoteDataSourceImpl(val api: ApiService) : RemoteDataSource {
+class RemoteDataSourceImpl @Inject constructor(val api: ApiService)
+    : RemoteDataSource {
 
     override suspend fun getFalconInfo(): ResponseResult<List<FalconInfoResult>> {
         return try {

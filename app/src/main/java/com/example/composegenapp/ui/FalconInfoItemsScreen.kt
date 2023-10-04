@@ -26,6 +26,7 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
     resLoad.let {
         when (it.value) {
             is ResponseResult.Loading -> ShowStatusScreen("Loading...")
+
             is ResponseResult.Success -> {
                 it.value.onSuccess { rockets ->
                     FalconInfoListView(rockets)
@@ -33,7 +34,7 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
             }
 
             is ResponseResult.Error -> it.value.onError { error ->
-                ShowStatusScreen(status = error.localizedMessage)
+                error.localizedMessage?.let { it1 -> ShowStatusScreen(status = it1) }
             }
 
         }

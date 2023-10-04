@@ -1,9 +1,10 @@
-package com.galeryalina.local
+package com.example.composegenapp.local
 
 import com.example.composegenapp.db.FalconInfoDao
 import com.example.composegenapp.db.FalconInfoEntity
+import javax.inject.Inject
 
-class LocalDataSource constructor(private val falconInfoDao: FalconInfoDao) {
+class LocalDataSource @Inject constructor(private val falconInfoDao: FalconInfoDao) {
 
     fun getAllRocketsInfo(): List<FalconInfoEntity> = falconInfoDao.getAllRocketsInfo()
 

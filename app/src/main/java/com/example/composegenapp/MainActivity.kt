@@ -35,9 +35,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity @Inject constructor(
-    private var getFalconInfoUseCase: GetFalconInfoUseCase
-) : ComponentActivity() {
+class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var getFalconInfoUseCase: GetFalconInfoUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
