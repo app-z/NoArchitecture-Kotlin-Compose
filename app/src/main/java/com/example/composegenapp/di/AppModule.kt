@@ -4,10 +4,10 @@ import android.content.Context
 import com.example.composegenapp.common.Constants
 import com.example.composegenapp.db.FalconInfoDao
 import com.example.composegenapp.db.FalconInfoDatabase
-import com.example.composegenapp.domain.domain.repository.FalconRepository
-import com.example.composegenapp.domain.domain.repository.FalconRepositoryImpl
-import com.example.composegenapp.domain.domain.usecase.GetFalconInfoUseCase
-import com.example.composegenapp.domain.domain.usecase.GetFalconInfoUseCaseImpl
+import com.example.composegenapp.domain.repository.FalconRepository
+import com.example.composegenapp.domain.repository.FalconRepositoryImpl
+import com.example.composegenapp.domain.usecase.GetFalconInfoUseCase
+import com.example.composegenapp.domain.usecase.GetFalconInfoUseCaseImpl
 import com.example.composegenapp.local.LocalDataSource
 import com.example.composegenapp.remote.ApiService
 import com.example.composegenapp.remote.RemoteDataSource

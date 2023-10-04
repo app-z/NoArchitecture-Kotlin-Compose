@@ -9,7 +9,6 @@ plugins {
     id("de.jensklingenberg.ktorfit") version "1.7.0"
     id ("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp") version "1.9.10-1.0.13"
-
 }
 
 android {
@@ -62,7 +61,7 @@ android {
 
 dependencies {
 
-    implementation("com.google.android.engage:engage-core:1.3.0")
+    implementation(libs.engage.core)
     val ktorVersion = "2.3.4"
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -92,9 +91,9 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-extended:1.5.1")
 
-    kapt(libs.androidx.room.compiler) // 'androidx.room:room-compiler:2.5.2'
-    implementation(libs.androidx.room.runtime)// 'androidx.room:room-runtime:2.5.2'
-    implementation(libs.androidx.room.ktx) // implementation 'androidx.room:room-ktx:2.5.2'
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
 
     implementation (libs.androidx.navigation.compose)
 

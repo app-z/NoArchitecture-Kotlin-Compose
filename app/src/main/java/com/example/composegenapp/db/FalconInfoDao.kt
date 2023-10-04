@@ -9,8 +9,8 @@ interface FalconInfoDao {
     @Query("SELECT * FROM FalconInfo")
     fun getAllRocketsInfo(): List<FalconInfoEntity>
 
-    @Query("SELECT * FROM FalconInfo WHERE id = :falconInfoId")
-    fun getRocketsInfo(falconInfoId: Int): List<FalconInfoEntity>
+    @Query("SELECT * FROM FalconInfo WHERE id = :id")
+    fun getRocketsInfo(id: Int): List<FalconInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllRocketsInfo(falconInfoResult: List<FalconInfoEntity>)

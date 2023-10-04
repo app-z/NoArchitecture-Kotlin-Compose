@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [FalconInfoEntity::class], version = 1, exportSchema = false)
+@Database(entities = [FalconInfoEntity::class], version = 3, exportSchema = false)
 abstract class FalconInfoDatabase : RoomDatabase() {
     abstract fun dao(): FalconInfoDao
 
@@ -43,7 +43,6 @@ abstract class FalconInfoDatabase : RoomDatabase() {
                 INSTANCE?.let {
                     scope.launch {
                         it.dao().cleanRockets()
-                        //it.dao().insertAllRocketsInfo(ConverterData.toEntry(ConverterData.getRockets()))
                     }
                 }
             }

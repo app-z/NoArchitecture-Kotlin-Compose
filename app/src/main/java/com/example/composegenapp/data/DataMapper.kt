@@ -3,9 +3,9 @@ package com.example.composegenapp.data
 import com.example.composegenapp.db.FalconInfoEntity
 import com.example.composegenapp.db.LinksEntry
 import com.example.composegenapp.db.PatchEntry
-import com.example.composegenapp.domain.domain.model.FalconInfo
-import com.example.composegenapp.domain.domain.model.Links
-import com.example.composegenapp.domain.domain.model.Patch
+import com.example.composegenapp.domain.model.FalconInfo
+import com.example.composegenapp.domain.model.Links
+import com.example.composegenapp.domain.model.Patch
 
 object DataMapper {
 
@@ -31,6 +31,7 @@ object DataMapper {
         return falconInfoResult.map {
             FalconInfoEntity(
                 id = it.id,
+                name = it.name,
                 linksEntry = LinksEntry(patchEntry = PatchEntry(small = it.linksResult?.patchResult?.small)),
                 staticFireDateUtc = it.staticFireDateUtc,
                 rocket = it.rocket,
@@ -42,6 +43,7 @@ object DataMapper {
     fun responseToDomain(falconInfoResult: List<FalconInfoResult>): List<FalconInfo> {
         return falconInfoResult.map {
             FalconInfo(id = it.id,
+                name = it.name,
                 links = Links(
                     patch =
                     Patch(small = it.linksResult?.patchResult?.small)
@@ -57,6 +59,7 @@ object DataMapper {
         return falconInfoEntity.map {
             FalconInfoResult(
                 id = it.id,
+                name = it.name,
                 linksResult = LinksResult(
                     patchResult =
                     PatchResult(small = it.linksEntry?.patchEntry?.small)
@@ -70,8 +73,8 @@ object DataMapper {
 
     fun entryToDomain(falconInfoEntity: List<FalconInfoEntity>) : List<FalconInfo> {
         return falconInfoEntity.map {
-
             FalconInfo(id = it.id,
+                name = it.name,
                 links = Links(
                     patch =
                     Patch(small = it.linksEntry?.patchEntry?.small)

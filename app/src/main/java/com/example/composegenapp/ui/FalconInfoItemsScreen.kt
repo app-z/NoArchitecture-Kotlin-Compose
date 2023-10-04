@@ -2,18 +2,20 @@ package com.example.composegenapp.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
+import androidx.compose.ui.platform.LocalContext
 import com.example.composegenapp.FalconInfoListView
 import com.example.composegenapp.common.DataSourceException
 import com.example.composegenapp.common.ResponseResult
 import com.example.composegenapp.common.onError
 import com.example.composegenapp.common.onSuccess
-import com.example.composegenapp.domain.domain.model.FalconInfo
-import com.example.composegenapp.domain.domain.usecase.GetFalconInfoUseCase
+import com.example.composegenapp.domain.model.FalconInfo
+import com.example.composegenapp.domain.usecase.GetFalconInfoUseCase
+import com.example.composegenapp.utils.getError
 
 @Composable
 fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
     val resLoad =
-        produceState<ResponseResult<List<FalconInfo>>>(initialValue = ResponseResult.Loading) {
+        produceState<ResponseResult<List<FalconInfo>>>(initialValue = ResponseResult.Loading, getFalconInfoUseCase) {
             try {
                 getFalconInfoUseCase.getFalconInfo().collect {
                     value = it
@@ -23,7 +25,7 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
             }
         }
 
-    resLoad.let {
+    resLoad.let { it ->
         when (it.value) {
             is ResponseResult.Loading -> ShowStatusScreen("Loading...")
 
@@ -34,7 +36,7 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
             }
 
             is ResponseResult.Error -> it.value.onError { error ->
-                error.localizedMessage?.let { it1 -> ShowStatusScreen(status = it1) }
+                ShowStatusScreen(error.getError(LocalContext.current))
             }
 
         }

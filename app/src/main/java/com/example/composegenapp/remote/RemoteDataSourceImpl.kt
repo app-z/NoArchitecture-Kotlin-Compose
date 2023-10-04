@@ -8,6 +8,7 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.ServerResponseException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(val api: ApiService)
@@ -20,12 +21,12 @@ class RemoteDataSourceImpl @Inject constructor(val api: ApiService)
         } catch (ex: RedirectResponseException) {
             ResponseResult.Error(DataSourceException.Server(R.string.error_server_unexpected_message))
         } catch (ex: ServerResponseException) {
-            ResponseResult.Error(DataSourceException.Server(R.string.no_results_found))
+            ResponseResult.Error(DataSourceException.Server(R.string.error_server_unexpected_message))
         } catch (ex: ClientRequestException) {
             ResponseResult.Error(DataSourceException.Client(R.string.error_client_unexpected_message ))
         } catch (ex: ResponseException) {
             ResponseResult.Error(DataSourceException.Unexpected(R.string.error_unexpected_message))
-        } catch (ex: ResponseException) {
+        } catch (ex: UnknownHostException) {
             ResponseResult.Error(DataSourceException.Unexpected(R.string.error_unexpected_message))
         }
     }

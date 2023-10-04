@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.composegenapp.domain.domain.model.FalconInfo
+import com.example.composegenapp.domain.model.FalconInfo
 
 @Composable
 fun FalconInfoCard(falconInfo: FalconInfo) {

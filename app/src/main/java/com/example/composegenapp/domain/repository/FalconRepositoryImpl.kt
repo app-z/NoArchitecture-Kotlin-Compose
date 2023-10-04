@@ -1,11 +1,11 @@
-package com.example.composegenapp.domain.domain.repository
+package com.example.composegenapp.domain.repository
 
 import com.example.composegenapp.common.ResponseResult
 import com.example.composegenapp.common.onFlowStarts
 import com.example.composegenapp.data.DataMapper
-import com.example.composegenapp.domain.domain.model.FalconInfo
-import com.example.composegenapp.remote.RemoteDataSource
+import com.example.composegenapp.domain.model.FalconInfo
 import com.example.composegenapp.local.LocalDataSource
+import com.example.composegenapp.remote.RemoteDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,10 +24,10 @@ class FalconRepositoryImpl @Inject constructor(
                 remoteDataSource.getFalconInfo().run {
                     when (this) {
                         is ResponseResult.Success -> {
+                            emit(ResponseResult.Success(DataMapper.responseToDomain(response)))
                             localDataSource
                                 .insertAllRocketsInfo(
                                     DataMapper.responseToEntry(response))
-                            emit(ResponseResult.Success(DataMapper.responseToDomain(response)))
                         }
                         is ResponseResult.Error -> {
                             emit(ResponseResult.Error(exception))

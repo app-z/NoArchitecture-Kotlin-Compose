@@ -1,4 +1,4 @@
-package com.example.composegenapp.domain.domain.model
+package com.example.composegenapp.domain.model
 
 
 data class FalconInfo(
