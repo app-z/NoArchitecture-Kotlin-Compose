@@ -5,10 +5,11 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class FalconInfo (
+data class FalconInfoResult (
+    @SerialName("id"                    ) var id                 : String             = "0",
 
 //    @SerialName("fairings"              ) var fairings           : Fairings?           = Fairings(),
-    @SerialName("links"                 ) var links              : Links?              = Links(),
+    @SerialName("links"                 ) var linksResult              : LinksResult?              = LinksResult(),
     @SerialName("static_fire_date_utc"  ) var staticFireDateUtc  : String?             = null,
     @SerialName("static_fire_date_unix" ) var staticFireDateUnix : Int?                = null,
     @SerialName("net"                   ) var net                : Boolean?            = null,
@@ -33,12 +34,10 @@ data class FalconInfo (
     @SerialName("auto_update"           ) var autoUpdate         : Boolean?            = null,
     @SerialName("tbd"                   ) var tbd                : Boolean?            = null,
     @SerialName("launch_library_id"     ) var launchLibraryId    : String?             = null,
-    @SerialName("id"                    ) var id                 : String?             = null
-
 )
 
 @Serializable
-data class Fairings (
+data class FairingsResult (
 
     @SerialName("reused"           ) var reused          : Boolean?          = null,
     @SerialName("recovery_attempt" ) var recoveryAttempt : Boolean?          = null,
@@ -48,15 +47,15 @@ data class Fairings (
 )
 
 @Serializable
-data class Patch (
+data class PatchResult (
     @SerialName("small" ) var small : String? = null,
     @SerialName("large" ) var large : String? = null
 )
 
 @Serializable
-data class Links (
+data class LinksResult (
 
-    @SerialName("patch"      ) var patch     : Patch?  = Patch(),
+    @SerialName("patch"      ) var patchResult     : PatchResult?  = PatchResult(),
 //    @SerialName("reddit"     ) var reddit    : Reddit? = Reddit(),
 //    @SerialName("flickr"     ) var flickr    : Flickr? = Flickr(),
     @SerialName("presskit"   ) var presskit  : String? = null,
@@ -66,20 +65,3 @@ data class Links (
     @SerialName("wikipedia"  ) var wikipedia : String? = null
 
 )
-
-
-// TODO: Delete @Parcelable because remembersaveable don`t use anymore.
-// val s: MutableState<FalconInfo> = rememberSaveable{ mutableStateOf(FalconInfo(null)) }
-//
-//val s: MutableState<List<FalconInfo>> = rememberSaveable{ mutableStateOf(listOf(FalconInfo(null))) }
-//
-//var initialState = ResponseResult.Loading
-//
-//if (s.value.isEmpty()) {
-//    initialState = ResponseResult.Loading
-//} else {
-//    ResponseResult.Success(s)
-//}
-//
-// LaunchedEffect(...
-// How about Pagenation?

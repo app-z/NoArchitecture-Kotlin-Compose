@@ -2,7 +2,9 @@ package com.example.composegenapp.common
 
 class Constants {
     companion object {
-        const val rocketsUrl = "https://api.spacexdata.com/v4/launches"
+        const val BASE_URL = "https://api.spacexdata.com"
+
+        const val LAUNCHES_URL = "/v4/launches"
 
         const val HOME_SCREEN = "homeScreen"
         const val ROCKETS_SCREEN = "rocketsScreen"

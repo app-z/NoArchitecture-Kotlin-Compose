@@ -1,4 +1,4 @@
-package com.example.spacex.data.common
+package com.example.composegenapp.common
 
 sealed class DataSourceException(val messageResource: Any?) : RuntimeException() {
     class Connection(messageResource: Int) : DataSourceException(messageResource)
