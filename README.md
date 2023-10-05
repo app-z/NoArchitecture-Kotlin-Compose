@@ -1,5 +1,5 @@
 # NoArchitecture-Kotlin-Compose
-NoArchitecture Kotlin Compose
+Clean Architecture Kotlin Compose
 
 
 
