@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.application")
     id("kotlin-parcelize")
@@ -6,9 +5,9 @@ plugins {
     id("kotlin-kapt")
     alias(libs.plugins.hilt)
     id("dagger.hilt.android.plugin")
-    id("de.jensklingenberg.ktorfit") version "1.7.0"
+    id("de.jensklingenberg.ktorfit")
     id ("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -114,12 +113,12 @@ dependencies {
     implementation(libs.timber)
 
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    androidTestImplementation(composeBom)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
