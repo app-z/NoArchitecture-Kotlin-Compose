@@ -23,7 +23,7 @@ object DataMapper {
             }
         }
 
-    fun getRockets(): List<FalconInfo> {
+    fun getMockRockets(): List<FalconInfo> {
         return rocketsSampleResult
     }
 

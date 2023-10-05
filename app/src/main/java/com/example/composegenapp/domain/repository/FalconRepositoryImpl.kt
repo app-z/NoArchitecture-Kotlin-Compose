@@ -15,7 +15,7 @@ import javax.inject.Inject
 class FalconRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource
 ) : FalconRepository {
-    override suspend fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>> {
+    override fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>> {
         return flow  {
             if (localDataSource.getAllRocketsInfo().isNotEmpty()) {
                 emit(ResponseResult.Success(

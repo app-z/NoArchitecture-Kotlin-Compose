@@ -119,6 +119,6 @@ sealed class Screen(
 @Composable
 fun PreviewConversation() {
     ComposeGenAppTheme {
-        FalconInfoListView(DataMapper.getRockets())
+        FalconInfoListView(DataMapper.getMockRockets())
     }
 }

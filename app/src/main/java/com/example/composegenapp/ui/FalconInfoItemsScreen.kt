@@ -14,7 +14,6 @@ import com.example.composegenapp.utils.getError
 
 @Composable
 fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
-    val resLoad =
         produceState<ResponseResult<List<FalconInfo>>>(initialValue = ResponseResult.Loading, getFalconInfoUseCase) {
             try {
                 getFalconInfoUseCase.getFalconInfo().collect {
@@ -23,10 +22,8 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
             } catch (e: DataSourceException) {
                 value = ResponseResult.Error(e)
             }
-        }
-
-    resLoad.let { it ->
-        when (it.value) {
+        }.let {
+            when (it.value) {
             is ResponseResult.Loading -> ShowStatusScreen("Loading...")
 
             is ResponseResult.Success -> {

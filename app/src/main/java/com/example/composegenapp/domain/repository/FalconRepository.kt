@@ -5,5 +5,5 @@ import com.example.composegenapp.domain.model.FalconInfo
 import kotlinx.coroutines.flow.Flow
 
 interface FalconRepository {
-    suspend fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>>
+    fun getFalconInfo(): Flow<ResponseResult<List<FalconInfo>>>
 }
