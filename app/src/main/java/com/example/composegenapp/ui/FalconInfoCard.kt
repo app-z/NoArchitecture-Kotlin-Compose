@@ -44,14 +44,11 @@ fun FalconInfoCard(falconInfo: FalconInfo) {
                     .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
             ) {
-                falconInfo.name?.let {
                     Text(
                         maxLines = 1,
-                        text = it,
+                        text = falconInfo.name,
                         style = MaterialTheme.typography.titleSmall
                     )
-
-                }
             }
 
             Row(modifier = Modifier

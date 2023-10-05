@@ -2,15 +2,8 @@
 NoArchitecture Kotlin Compose
 
 
-                    var selectedTabIndex by remember {
-                        mutableIntStateOf(0)
-                    }
 
-
-                    LaunchedEffect(selectedTabIndex) {
-                        pagerState.animateScrollToPage(selectedTabIndex)
-                    }
-
+![Cards](https://raw.githubusercontent.com/app-z/NoArchitecture-Kotlin-Compose/ktorfit/img/screen_main_440.png)
 
 
 Article:
