@@ -1,5 +1,6 @@
 package com.example.composegenapp.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,16 +28,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.example.composegenapp.R
-import com.example.composegenapp.common.Constants
-import com.example.composegenapp.common.Constants.Companion.HOME_TAB
-import com.example.composegenapp.common.Constants.Companion.LOGIN_TAB
-import com.example.composegenapp.common.Constants.Companion.ROCKETS_TAB
+import com.example.composegenapp.domain.usecase.GetFalconInfoUseCase
+import com.example.composegenapp.ui.Screen.Companion.HOME_SCREEN
+import com.example.composegenapp.ui.Screen.Companion.LOGIN_SCREEN
+import com.example.composegenapp.ui.Screen.Companion.LOGIN_TAB
+import com.example.composegenapp.ui.Screen.Companion.ROCKETS_SCREEN
 import timber.log.Timber
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun BottomTabPanel(navController: NavController) {
+fun BottomTabPanel(getFalconInfoUseCase: GetFalconInfoUseCase,
+                   navController: NavHostController)
+{
+
+    NavHost(navController = navController, startDestination = LOGIN_SCREEN) {
+        composable(HOME_SCREEN) { HomeScreen() }
+        composable(ROCKETS_SCREEN) { FalconInfoItemsScreen(getFalconInfoUseCase) }
+        composable(LOGIN_SCREEN) { LoginScreen() }
+    }
 
     val tabItems = initTabItems()
 
@@ -93,42 +106,66 @@ fun BottomTabPanel(navController: NavController) {
             if (!pagerState.isScrollInProgress) {
                 selectedTabIndex = pagerState.currentPage
                 Timber.d("2> $selectedTabIndex")
-                when (selectedTabIndex) {
-                    HOME_TAB -> navigate(navController, Constants.HOME_SCREEN)
-                    ROCKETS_TAB -> navigate(navController, Constants.ROCKETS_SCREEN)
-                    LOGIN_TAB -> navigate(navController, Constants.LOGIN_SCREEN)
-                }
-
+                navigateTo(navController, selectedTabIndex)
             }
         }
     }
 }
 
-fun navigate(navController: NavController, route: String) {
-    navController.navigate(route) {
-        popUpTo(0)
+private fun navigateTo(navController: NavController,  tabIndex: Int) {
+    val item = listOf(Screen.Home, Screen.Rockets, Screen.Login)
+        .first{ it.tabIndex == tabIndex }
+    navController.navigate(item.route) {
+        if (item.popUp)popUpTo(0)
     }
 }
+
+sealed class Screen(
+    val tabIndex: Int,
+    val route: String,
+    @StringRes val textResId: Int,
+    val selectedItem: ImageVector,
+    val unselectedItem: ImageVector,
+    val popUp: Boolean = true
+) {
+    data object Home : Screen(HOME_TAB, HOME_SCREEN, R.string.home,
+        Icons.Filled.Home, Icons.Outlined.Home)
+    data object Rockets : Screen(ROCKETS_TAB, ROCKETS_SCREEN, R.string.rockets,
+        Icons.Filled.Rocket, Icons.Outlined.Rocket)
+    data object Login : Screen(LOGIN_TAB, LOGIN_SCREEN, R.string.login,
+        Icons.Filled.AccountCircle, Icons.Outlined.AccountCircle)
+
+    companion object {
+        const val HOME_SCREEN = "homeScreen"
+        const val ROCKETS_SCREEN = "rocketsScreen"
+        const val LOGIN_SCREEN = "loginScreen"
+
+        const val HOME_TAB = 0
+        const val ROCKETS_TAB = 1
+        const val LOGIN_TAB = 2
+    }
+}
+
+
 
 @Composable
 private fun initTabItems(): List<TabItem> {
     val context = LocalContext.current
     return listOf(
         TabItem(
-            title = context.getString(R.string.home),
-            unselectedItem = Icons.Outlined.Home,
-            selectedItem = Icons.Filled.Home,
-
+            title = context.getString(Screen.Home.textResId),
+            unselectedItem = Screen.Home.unselectedItem,
+            selectedItem = Screen.Home.selectedItem,
             ),
         TabItem(
-            title = context.getString(R.string.rockets),
-            unselectedItem = Icons.Outlined.Rocket,
-            selectedItem = Icons.Filled.Rocket
+            title = context.getString(Screen.Rockets.textResId),
+            unselectedItem = Screen.Rockets.unselectedItem,
+            selectedItem = Screen.Rockets.unselectedItem
         ),
         TabItem(
-            title = context.getString(R.string.login),
-            unselectedItem = Icons.Outlined.AccountCircle,
-            selectedItem = Icons.Filled.AccountCircle
+            title = context.getString(Screen.Login.textResId),
+            unselectedItem = Screen.Login.unselectedItem,
+            selectedItem = Screen.Login.selectedItem
         )
     )
 }

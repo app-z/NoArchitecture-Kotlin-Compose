@@ -11,9 +11,11 @@ import com.example.composegenapp.common.onSuccess
 import com.example.composegenapp.domain.model.FalconInfo
 import com.example.composegenapp.domain.usecase.GetFalconInfoUseCase
 import com.example.composegenapp.utils.getError
+import javax.inject.Inject
 
 @Composable
 fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
+
         produceState<ResponseResult<List<FalconInfo>>>(initialValue = ResponseResult.Loading, getFalconInfoUseCase) {
             try {
                 getFalconInfoUseCase.getFalconInfo().collect {
