@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun FalconInfoListView(falconInfoEntries: List<FalconInfo>) {
     LazyVerticalGrid(modifier = Modifier
-        .background(Color.Black)
+        .background(MaterialTheme.colorScheme.background)
         .padding(4.dp),
         columns = GridCells.Fixed(2), content = {
             items(falconInfoEntries) { falconInfo ->

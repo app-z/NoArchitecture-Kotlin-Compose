@@ -26,7 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -150,24 +150,13 @@ sealed class Screen(
 
 @Composable
 private fun initTabItems(): List<TabItem> {
-    val context = LocalContext.current
-    return listOf(
-        TabItem(
-            title = context.getString(Screen.Home.textResId),
-            unselectedItem = Screen.Home.unselectedItem,
-            selectedItem = Screen.Home.selectedItem,
-            ),
-        TabItem(
-            title = context.getString(Screen.Rockets.textResId),
-            unselectedItem = Screen.Rockets.unselectedItem,
-            selectedItem = Screen.Rockets.unselectedItem
-        ),
-        TabItem(
-            title = context.getString(Screen.Login.textResId),
-            unselectedItem = Screen.Login.unselectedItem,
-            selectedItem = Screen.Login.selectedItem
-        )
-    )
+    val items = listOf(Screen.Home, Screen.Rockets, Screen.Login)
+
+    return items.map {
+        TabItem(title = stringResource(it.textResId),
+            unselectedItem = it.unselectedItem,
+            selectedItem = it.selectedItem)
+    }
 }
 
 
