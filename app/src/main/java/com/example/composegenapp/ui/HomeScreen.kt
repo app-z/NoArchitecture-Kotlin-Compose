@@ -8,4 +8,3 @@ import com.example.composegenapp.common.Animations
 fun HomeScreen() {
     Animations.AnimBox(resId = R.drawable.collection_olive_hoodie_photo_main_page_2000x)
 }
-

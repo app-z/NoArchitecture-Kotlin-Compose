@@ -12,4 +12,5 @@ val Pink40 = Color(0xFF766d9d)
 
 val BlueSky40 = Color(0xFF3e538b)
 
-
+val BackGround40 = Color(0xFF0F0F0F)
+val BackGround80 = Color(0xFF0C0C0C)
