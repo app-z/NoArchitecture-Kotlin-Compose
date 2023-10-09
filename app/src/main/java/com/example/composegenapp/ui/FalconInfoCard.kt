@@ -74,15 +74,15 @@ fun FalconInfoCard(falconInfo: FalconInfo) {
                     .wrapContentHeight()
                     .padding(8.dp)
             ) {
-                falconInfo.details?.let {
+                val textDesc = if (falconInfo.details.isNullOrEmpty())
+                    "No Info about mission\nEmpty description"
+                else falconInfo.details
                     Text(
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
-                        text = it,
+                        text = textDesc!!,  // Never null
                         style = MaterialTheme.typography.bodyMedium
                     )
-
-                }
             }
         }
 }
