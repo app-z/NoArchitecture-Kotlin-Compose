@@ -2,6 +2,7 @@ package com.example.composegenapp.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -62,14 +63,14 @@ fun BottomTabPanel(getFalconInfoUseCase: GetFalconInfoUseCase,
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Bottom
     ) {
 
         HorizontalPager(
             state = pagerState,
             modifier = Modifier
-                .fillMaxWidth(1f)
-                .weight(1f)
+                .fillMaxWidth()
         )
         { index ->
             Timber.d("index = $index")
@@ -100,13 +101,13 @@ fun BottomTabPanel(getFalconInfoUseCase: GetFalconInfoUseCase,
         LaunchedEffect(selectedTabIndex) {
             pagerState.animateScrollToPage(selectedTabIndex)
             Timber.d("1> selectedTabIndex = $selectedTabIndex")
-            navigateTo(navController, selectedTabIndex)
         }
 
         LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
             if (!pagerState.isScrollInProgress) {
                 selectedTabIndex = pagerState.currentPage
                 Timber.d("2> $selectedTabIndex")
+                navigateTo(navController, selectedTabIndex)
             }
         }
     }
