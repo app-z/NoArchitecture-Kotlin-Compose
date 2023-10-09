@@ -13,6 +13,7 @@ import com.example.composegenapp.common.onSuccess
 import com.example.composegenapp.domain.model.FalconInfo
 import com.example.composegenapp.domain.usecase.GetFalconInfoUseCase
 import com.example.composegenapp.utils.getError
+import timber.log.Timber
 
 @Composable
 fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
@@ -32,6 +33,7 @@ fun FalconInfoItemsScreen(getFalconInfoUseCase: GetFalconInfoUseCase) {
             is ResponseResult.Success -> {
                 it.value.onSuccess { rockets ->
                     FalconInfoListView(rockets)
+                    Timber.d("${rockets}")
                 }
             }
 

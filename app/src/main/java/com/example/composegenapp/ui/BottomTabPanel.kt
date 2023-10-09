@@ -100,13 +100,13 @@ fun BottomTabPanel(getFalconInfoUseCase: GetFalconInfoUseCase,
         LaunchedEffect(selectedTabIndex) {
             pagerState.animateScrollToPage(selectedTabIndex)
             Timber.d("1> selectedTabIndex = $selectedTabIndex")
+            navigateTo(navController, selectedTabIndex)
         }
 
         LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
             if (!pagerState.isScrollInProgress) {
                 selectedTabIndex = pagerState.currentPage
                 Timber.d("2> $selectedTabIndex")
-                navigateTo(navController, selectedTabIndex)
             }
         }
     }

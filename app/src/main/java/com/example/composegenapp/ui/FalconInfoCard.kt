@@ -31,7 +31,6 @@ import com.example.composegenapp.domain.model.FalconInfo
 @Composable
 fun FalconInfoCard(falconInfo: FalconInfo) {
         Card(modifier = Modifier
-            .fillMaxSize()
             .padding(4.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primary
